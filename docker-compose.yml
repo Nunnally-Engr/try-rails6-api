@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  db:
+    image: mysql:5.7.21
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db-volume:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  back:
+    build: .
+    command: >
+      ash -c "rm -f tmp/pids/server.pid &&
+      bundle exec rails s -p 4000 -b '0.0.0.0'"
+    volumes:
+      - .:/try-rails6-api
+    ports:
+      - "4000:4000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+volumes:
+  db-volume:
+    driver: local
