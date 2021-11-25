@@ -136,16 +136,16 @@ default: &default
 
 development:
   <<: *default
-  database: try_rails_api_development
+  database: rails_api_development
 
 test:
   <<: *default
-  database: try_rails_api_test
+  database: rails_api_test
 
 production:
   <<: *default
-  database: try_rails_api_production
-  username: try_rails_api
+  database: rails_api_production
+  username: rails_api
   password: <%= ENV['DB_PASSWORD_PRODUCTION'] %>
   host: 127.0.0.1
 ```
